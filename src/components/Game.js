@@ -5,6 +5,9 @@ import FinalPoem from './FinalPoem';
 import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
+  // me
+  const [poemList, setPoemList] = useState(poems);
+
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
       return field.placeholder;
@@ -12,6 +15,21 @@ const Game = () => {
       return field;
     }
   }).join(' ');
+
+  // me
+  const addPoem = (poem) => {
+    const newPoemList = [...poems];
+
+    const nextId = newPoemList.reduce((accumulator, currentPem) => {
+      return Math.max(accumulator, currentPem.id);
+    }, 0) + 1;
+    // newPoemList.push({
+    //   key: nextId,
+    //   placeholder: poem.placeholder
+    // })
+
+
+  }
 
   return (
     <div className="Game">
