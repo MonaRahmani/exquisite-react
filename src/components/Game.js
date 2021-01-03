@@ -6,7 +6,8 @@ import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
   // me
-  const [poemList, setPoemList] = useState(poems);
+  const [player, setPlayer] = useState(1);
+  const [poemList, setPoemList] = useState([]);
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
@@ -18,16 +19,18 @@ const Game = () => {
 
   // me
   const addPoem = (poem) => {
-    const newPoemList = [...poems];
+    const newPoemList = [...poemList];
+    newPoemList.push(poem)
+    setPoemList(newPoemList);
+    setPlayer(player + 1)
 
-    const nextId = newPoemList.reduce((accumulator, currentPem) => {
-      return Math.max(accumulator, currentPem.id);
-    }, 0) + 1;
+    // const nextId = newPoemList.reduce((accumulator, currentPem) => {
+    //   return Math.max(accumulator, currentPem.id);
+    // }, 0) + 1;
     // newPoemList.push({
     //   key: nextId,
     //   placeholder: poem.placeholder
     // })
-
 
   }
 
@@ -43,9 +46,9 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      <RecentSubmission />
+      <RecentSubmission lastPoem={poemList[poemList.length-1]}/>
 
-      <PlayerSubmissionForm />
+      <PlayerSubmissionForm player={player} onSubmitCallback={addPoem}/>
 
       <FinalPoem />
 
