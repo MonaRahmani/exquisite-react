@@ -48,7 +48,7 @@ const Game = () => {
 
       <RecentSubmission lastPoem={poemList[poemList.length-1]}/>
 
-      <PlayerSubmissionForm player={player} onSubmitCallback={addPoem}/>
+      <PlayerSubmissionForm player={player} sendSubmission={addPoem}/>
 
       <FinalPoem />
 
