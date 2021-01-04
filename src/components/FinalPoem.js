@@ -3,18 +3,25 @@ import PropTypes from 'prop-types';
 import './FinalPoem.css';
 
 const FinalPoem = (props) => {
-  // console.log("FinalPoem PROPS:");
   // console.log(props);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // console.log("Submitted");
   }
+
+  const revealPoem = poemList => {
+    return poemList.map((item, i) => {
+      return (
+      <p key={i}>{`The ${item.adj1} ${item.noun1} ${item.adv} ${item.verb} the ${item.adj2} ${item.noun2}.`}</p>
+      );
+    });
+  } 
 
   return (
     <div className='FinalPoem'>
       <section className='FinalPoem__poem'>
         <h3>Final Poem</h3>
+        {revealPoem(props.poemList)}
 
       </section>
 
@@ -23,7 +30,7 @@ const FinalPoem = (props) => {
           type="button" 
           value="We are finished: Reveal the Poem" 
           className="FinalPoem__reveal-btn" 
-          onSubmit={onSubmit}
+          // onSubmit={onSubmit}
           />
       </div>
     </div>
