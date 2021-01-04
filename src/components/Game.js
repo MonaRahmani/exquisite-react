@@ -45,12 +45,11 @@ const Game = () => {
       <p className="Game__format-example">
         { exampleFormat }
       </p>
-
-      <RecentSubmission lastPoem={poemList[poemList.length-1]}/>
+      { poemList.length > 0 && <RecentSubmission lastPoem={poemList[poemList.length-1]}/>}
 
       <PlayerSubmissionForm player={player} sendSubmission={addPoem}/>
 
-      <FinalPoem />
+      <FinalPoem poemList={poemList}/>
 
     </div>
   );
