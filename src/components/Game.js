@@ -5,9 +5,10 @@ import FinalPoem from './FinalPoem';
 import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
-  // me
+  
   const [player, setPlayer] = useState(1);
   const [poemList, setPoemList] = useState([]);
+  const [revealPoem, setRevealPoem] = useState(false);
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
@@ -17,21 +18,15 @@ const Game = () => {
     }
   }).join(' ');
 
-  // me
   const addPoem = (poem) => {
     const newPoemList = [...poemList];
     newPoemList.push(poem)
     setPoemList(newPoemList);
     setPlayer(player + 1)
+  }
 
-    // const nextId = newPoemList.reduce((accumulator, currentPem) => {
-    //   return Math.max(accumulator, currentPem.id);
-    // }, 0) + 1;
-    // newPoemList.push({
-    //   key: nextId,
-    //   placeholder: poem.placeholder
-    // })
-
+  const onFinalSubmit = () => {
+    setRevealPoem(true)
   }
 
   return (
@@ -45,11 +40,12 @@ const Game = () => {
       <p className="Game__format-example">
         { exampleFormat }
       </p>
-      { poemList.length > 0 && <RecentSubmission lastPoem={poemList[poemList.length-1]}/>}
+      {poemList.length > 0 && !revealPoem && <RecentSubmission lastPoem={poemList[poemList.length-1]}/>}
 
-      <PlayerSubmissionForm player={player} sendSubmission={addPoem}/>
+      {!revealPoem ? <PlayerSubmissionForm player={player} sendSubmission={addPoem}/> : ''}
 
-      <FinalPoem poemList={poemList}/>
+      <FinalPoem poemList={poemList} revealPoem={revealPoem} submissions={onFinalSubmit}/>
+      {/* <FinalPoem isSubmitted={false} submissions={[]} revealPoem={() => { }} /> */}
 
     </div>
   );
